@@ -1,0 +1,120 @@
+# תרגיל 1
+
+sequence = "ATCGCGTA"
+
+# הופך את הרצף לאותיות גדולות
+sequence = sequence.upper()
+
+# סופרים כמה G ו-C יש
+gc_count = sequence.count('G') + sequence.count('C')
+
+# מחשבים את האחוז
+gc_content = (gc_count / len(sequence)) * 100
+
+# מדפיסים את התוצאה עם 2 ספרות אחרי הנקודה
+print(f"GC content: {gc_content:.2f}%")
+
+
+# 2 תרגיל 
+
+# רצף ה-DNA המקורי
+DNA_sequence = "GATTACA"
+
+# מילון של התאמות בסיסים
+complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+
+# מחרוזת ריקה שתאחסן את הרצף המשלים
+result = ""
+
+# לולאה שעוברת על כל אות ברצף המקורי
+for base in DNA_sequence:
+    # מוצאת את הבסיס המשלים ומוסיפה אותו לתוצאה
+    result += complement[base]
+
+# מדפיסים את הרצף המשלים
+print("Original:", DNA_sequence)
+print("Complementary:", result)
+
+help("for")
+
+
+# 3 תרגיל 
+
+sequence_2 = "ATCGATAGC"
+
+# סופרים את מספר הפעמים שכל בסיס מופיע
+count_A = sequence_2.count("A")
+
+# מציגים את התוצאה
+print("A:", count_A)
+
+sequence_2 = "ATCGATAGC"
+
+for base in "ATCG":
+    count = sequence_2.count(base)
+    print(f"{base}: {count}")
+
+
+# תרגיל 4 - נתונים מתוך - Clustal Omega
+
+seq1 = "GRRRSVQWCA"
+seq2 = "APRKNVRWCT"
+
+for AminoAcid in zip(seq1, seq2):
+    print(AminoAcid)
+# zip - עובר תו תו עבור 2 רצפים, אחד מול השני
+
+
+count_same = 0
+count_diff = 0
+
+for a1, a2 in zip(seq1, seq2):
+    if a1 == a2:
+        count_same += 1
+    else: 
+        count_diff += 1
+
+print("זהים:", count_same)
+print("שונים:", count_diff)
+
+IDENTICAL_PERCENT = (count_same / len(seq1)) * 100
+print(f"אחוז דמיון: {IDENTICAL_PERCENT:.2f}%")
+# מסמן מחרוזת עם משתנים; בתוך {} כותבים שם משתנה או ביטוי, ופייתון מחליפה אותו בערך המתאים f""
+
+for i, (a1, a2) in enumerate(zip(seq1, seq2), start=1):
+    if a1 == a2:
+        print(f"עמדה {i}: {a1} מול {a2} = זהים")
+    else:
+        print(f"עמדה {i}: {a1} מול {a2} = שונים")
+
+
+
+# איך להפוך את הקוד לפונקציה שתאפשר להריץ כל 2 רצפים?
+
+def compare_sequences(seq1, seq2):
+    count_same = 0
+    count_diff = 0
+    
+    if len(seq1) != len(seq2):
+        print("אזהרה: הרצפים אינם באותו אורך! ההשוואה נעצרת.")
+        return
+
+    for AminoAcid in zip(seq1, seq2):
+        print(AminoAcid)
+
+    for a1, a2 in zip(seq1, seq2):
+        if a1 == a2:
+            count_same += 1
+        else: 
+            count_diff += 1
+
+    IDENTICAL_PERCENT = (count_same / len(seq1)) * 100
+    print(f"אחוז דמיון: {IDENTICAL_PERCENT:.2f}%")
+    
+    for i, (a1, a2) in enumerate(zip(seq1, seq2), start=1):
+        if a1 == a2:
+            print(f"עמדה {i}: {a1} מול {a2} → זהים")
+        else:
+            print(f"עמדה {i}: {a1} מול {a2} → שונים")
+compare_sequences("ATGCG", "ATCACG")
+
